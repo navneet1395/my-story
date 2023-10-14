@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-const loading = () => {
+const Loading = () => {
   const router = useRouter();
   useEffect(() => {
     const loadingSteps = document.querySelectorAll(".loading-step");
@@ -14,7 +14,7 @@ const loading = () => {
     setTimeout(() => {
       router.push("/home"); // Replace with the desired URL of the home page
     }, 12000);
-  }, []);
+  }, [router, loadingSteps]);
   return (
     <>
       
@@ -61,5 +61,5 @@ const loading = () => {
     </>
   );
 };
-export default loading;
+export default Loading;
 
