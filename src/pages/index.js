@@ -14,7 +14,7 @@ const Loading = () => {
     setTimeout(() => {
       router.push("/home"); // Replace with the desired URL of the home page
     }, 12000);
-  }, [router, loadingSteps]);
+  }, [router]);
   return (
     <>
       

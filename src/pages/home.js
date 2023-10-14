@@ -78,7 +78,7 @@ export default function Home() {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [welcomeMessages]);
 
   return (
     <div className={styles.container}>
