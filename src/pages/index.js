@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
 
 import { useRouter } from "next/router";
-const loading = () => {
+const Loading = () => {
   const router = useRouter();
   useEffect(() => {
     const loadingSteps = document.querySelectorAll(".loading-step");
@@ -145,5 +145,5 @@ const loading = () => {
     </>
   );
 };
-export default loading;
+export default Loading;
 
