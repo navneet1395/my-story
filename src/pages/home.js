@@ -1,85 +1,27 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { useEffect, useState } from "react";
-
+import Link from "next/link";
 export default function Home() {
-  const welcomeMessages = [
-      {
-        languageName: "Hindi",
-        message: "नमस्ते",
-        alternateEnglishText: "Namaste",
-      },
-    { languageName: "French", message: "Bienvenue" },
-    { languageName: "Italian", message: "Benvenuto/a" },
-    { languageName: "Portuguese", message: "Bem-vindo/a" },
-    { languageName: "Swedish", message: "Välkommen" },
-    // { languageName: "Punjabi", message: "Sata Sri Akal" },
-    // { languageName: "Bangla", message: "Nomoshkar" },
-    {
-      languageName: "Kashmiri",
-      message: "आदाब",
-      alternateEnglishText: "Aadab",
-    },
-    { languageName: "Magadhi", message: "Parnam" },
-    { languageName: "Marathi", message: "Namaskar" },
-    { languageName: "Tamil", message: "Vanakkam" },
-    { languageName: "Telegu", message: "Namaskaram" },
-    { languageName: "Dari", message: "Salâm" },
-    { languageName: "Dholuo", message: "Ajolo in" },
-    { languageName: "Kannada", message: "ಸ್ವಾಗತಾರ್ಹ" },
-    { languageName: "Japanese", message: "ようこそ" },
-    { languageName: "Kimeru", message: "igua wamukiri mono" },
-    { languageName: "Hausa", message: "maraba" },
-    { languageName: "Kinyarwanda", message: "Ikaze" },
-    { languageName: "Chichewa", message: "takulandirani" },
-    {
-      languageName: "Punjabi",
-      message: "ਸਤਿ ਸ਼੍ਰੀ ਅਕਾਲ",
-      alternateEnglishText: "Sat Sri kal",
-    },
-    {
-      languageName: "Bangla",
-      message: "নমস্কার",
-      alternateEnglishText: "Nomoshkar",
-    },
-    {
-      languageName: "Magadhi",
-      message: "प्रणाम",
-      alternateEnglishText: "Parnam",
-    },
-    {
-      languageName: "Marathi",
-      message: "नमस्कार",
-      alternateEnglishText: "Namaskar",
-    },
-    {
-      languageName: "Tamil ",
-      message: "வணக்கம்",
-      alternateEnglishText: "Vanakkam ",
-    },
-    {
-      languageName: "Telegu",
-      message: "నమస్కరం",
-      alternateEnglishText: "Namaskaram ",
-    },
-    {
-      languageName: "BrajBhasha",
-      message: "राधे राधे",
-      alternateEnglishText: "Radhe Radhe ",
-    },
-  ];
-  const [welcomeIndex, setWelcomeIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setWelcomeIndex((prevIndex) => (prevIndex + 1) % welcomeMessages.length);
-    }, 3000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [welcomeMessages]);
-
+  const [data, setData] = useState({name:"",mail:"",message:""});
+  const SendMail = async (e) => {
+    fetch('http://localhost:3000/api/email',{method:"POST",body:{
+        name:data.name,mail:data.mail,message:data.message
+    }})
+   .then(
+    
+   (res)=>{
+     alert('Send Mail To You')
+     setEmail('')
+ 
+   }
+ 
+   ).catch(
+     (e)=>console.log(e)
+   )
+    e.preventDefault();
+    console.log("call");
+  };
   return (
     <div className={styles.container}>
       <Head>
@@ -89,29 +31,224 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-          <div className="d-flex-cc">
-            <div style={{display:"flex", gap:"1rem" ,flexWrap:"wrap"}}>
-            <span className={styles.fadeIn}>
-        <h1 className={styles.title} >
-            {welcomeMessages[welcomeIndex].message}
-        </h1>
-            <br/>in<br/>
-            <i>{welcomeMessages[welcomeIndex].languageName}</i>
-          </span>
-          <div>
-          <div class="blobs">
-  <div class="blob"></div>
-  <div class="blob"></div>
-  <div class="blob"></div>
-  <div class="blob"></div>
-  <div class="blob"></div>
-</div>
-          </div>
+        <section
+          id="contact-us"
+          style={{
+            backgroundColor: "#817774",
+            minHeight: "30vh",
+            padding: "1rem",
+          }}
+        >
+          <div
+            style={{
+              border: "1px solid #EFE1D2",
+              borderRadius: "16px",
+              padding: "2rem",
+              height: "100%",
+              display: "flex",
+              color: "#EFE1D2",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "1rem",
+            }}
+          >
+            <div style={{ textAlign: "center" }}>
+              <h1>Connect with me</h1>
+              <h3>on</h3>
+              <div
+                style={{
+                  gap: "1rem",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <Link
+                  href="https://www.linkedin.com/in/navneet-gupta-jklu?utm_source=share&utm_content=profile"
+                  target="_blank"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    fill="#fff"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                  </svg>
+                </Link>
+                <Link href="telto:+918887305900">
+                  <svg
+                    fill="#fff"
+                    // stroke="#fff"
+                    height="24"
+                    width="24"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 473.806 473.806"
+                  >
+                    <g>
+                      <g>
+                        <path
+                          d="M374.456,293.506c-9.7-10.1-21.4-15.5-33.8-15.5c-12.3,0-24.1,5.3-34.2,15.4l-31.6,31.5c-2.6-1.4-5.2-2.7-7.7-4
+			c-3.6-1.8-7-3.5-9.9-5.3c-29.6-18.8-56.5-43.3-82.3-75c-12.5-15.8-20.9-29.1-27-42.6c8.2-7.5,15.8-15.3,23.2-22.8
+			c2.8-2.8,5.6-5.7,8.4-8.5c21-21,21-48.2,0-69.2l-27.3-27.3c-3.1-3.1-6.3-6.3-9.3-9.5c-6-6.2-12.3-12.6-18.8-18.6
+			c-9.7-9.6-21.3-14.7-33.5-14.7s-24,5.1-34,14.7c-0.1,0.1-0.1,0.1-0.2,0.2l-34,34.3c-12.8,12.8-20.1,28.4-21.7,46.5
+			c-2.4,29.2,6.2,56.4,12.8,74.2c16.2,43.7,40.4,84.2,76.5,127.6c43.8,52.3,96.5,93.6,156.7,122.7c23,10.9,53.7,23.8,88,26
+			c2.1,0.1,4.3,0.2,6.3,0.2c23.1,0,42.5-8.3,57.7-24.8c0.1-0.2,0.3-0.3,0.4-0.5c5.2-6.3,11.2-12,17.5-18.1c4.3-4.1,8.7-8.4,13-12.9
+			c9.9-10.3,15.1-22.3,15.1-34.6c0-12.4-5.3-24.3-15.4-34.3L374.456,293.506z M410.256,398.806
+			C410.156,398.806,410.156,398.906,410.256,398.806c-3.9,4.2-7.9,8-12.2,12.2c-6.5,6.2-13.1,12.7-19.3,20
+			c-10.1,10.8-22,15.9-37.6,15.9c-1.5,0-3.1,0-4.6-0.1c-29.7-1.9-57.3-13.5-78-23.4c-56.6-27.4-106.3-66.3-147.6-115.6
+			c-34.1-41.1-56.9-79.1-72-119.9c-9.3-24.9-12.7-44.3-11.2-62.6c1-11.7,5.5-21.4,13.8-29.7l34.1-34.1c4.9-4.6,10.1-7.1,15.2-7.1
+			c6.3,0,11.4,3.8,14.6,7c0.1,0.1,0.2,0.2,0.3,0.3c6.1,5.7,11.9,11.6,18,17.9c3.1,3.2,6.3,6.4,9.5,9.7l27.3,27.3
+			c10.6,10.6,10.6,20.4,0,31c-2.9,2.9-5.7,5.8-8.6,8.6c-8.4,8.6-16.4,16.6-25.1,24.4c-0.2,0.2-0.4,0.3-0.5,0.5
+			c-8.6,8.6-7,17-5.2,22.7c0.1,0.3,0.2,0.6,0.3,0.9c7.1,17.2,17.1,33.4,32.3,52.7l0.1,0.1c27.6,34,56.7,60.5,88.8,80.8
+			c4.1,2.6,8.3,4.7,12.3,6.7c3.6,1.8,7,3.5,9.9,5.3c0.4,0.2,0.8,0.5,1.2,0.7c3.4,1.7,6.6,2.5,9.9,2.5c8.3,0,13.5-5.2,15.2-6.9
+			l34.2-34.2c3.4-3.4,8.8-7.5,15.1-7.5c6.2,0,11.3,3.9,14.4,7.3c0.1,0.1,0.1,0.1,0.2,0.2l55.1,55.1
+			C420.456,377.706,420.456,388.206,410.256,398.806z"
+                        />
+                        <path
+                          d="M256.056,112.706c26.2,4.4,50,16.8,69,35.8s31.3,42.8,35.8,69c1.1,6.6,6.8,11.2,13.3,11.2c0.8,0,1.5-0.1,2.3-0.2
+			c7.4-1.2,12.3-8.2,11.1-15.6c-5.4-31.7-20.4-60.6-43.3-83.5s-51.8-37.9-83.5-43.3c-7.4-1.2-14.3,3.7-15.6,11
+			S248.656,111.506,256.056,112.706z"
+                        />
+                        <path
+                          d="M473.256,209.006c-8.9-52.2-33.5-99.7-71.3-137.5s-85.3-62.4-137.5-71.3c-7.3-1.3-14.2,3.7-15.5,11
+			c-1.2,7.4,3.7,14.3,11.1,15.6c46.6,7.9,89.1,30,122.9,63.7c33.8,33.8,55.8,76.3,63.7,122.9c1.1,6.6,6.8,11.2,13.3,11.2
+			c0.8,0,1.5-0.1,2.3-0.2C469.556,223.306,474.556,216.306,473.256,209.006z"
+                        />
+                      </g>
+                    </g>
+                  </svg>
+                </Link>
+                <Link href={"https://wa.me/qr/FQQVWGHKGKNRM1"} target="_blank">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 48 48"
+                    id="Layer_2"
+                    data-name="Layer 2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    stroke="#fff"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path
+                      class="cls-1"
+                      d="M24,2.5A21.52,21.52,0,0,0,5.15,34.36L2.5,45.5l11.14-2.65A21.5,21.5,0,1,0,24,2.5ZM13.25,12.27h5.86a1,1,0,0,1,1,1,10.4,10.4,0,0,0,.66,3.91,1.93,1.93,0,0,1-.66,2.44l-2.05,2a18.6,18.6,0,0,0,3.52,4.79A18.6,18.6,0,0,0,26.35,30l2-2.05c1-1,1.46-1,2.44-.66a10.4,10.4,0,0,0,3.91.66,1.05,1.05,0,0,1,1,1v5.86a1.05,1.05,0,0,1-1,1,23.68,23.68,0,0,1-15.64-6.84,23.6,23.6,0,0,1-6.84-15.64A1.07,1.07,0,0,1,13.25,12.27Z"
+                    />
+                  </svg>
+                </Link>
+                <Link href="mailto:navneetgupta@jklu.edu.in">
+                  <svg
+                    fill="#fff"
+                    height="24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 64 64"
+                    enable-background="new 0 0 64 64"
+                  >
+                    <path
+                      id="Mail"
+                      d="M58.0034485,8H5.9965506c-3.3136795,0-5.9999995,2.6862001-5.9999995,6v36c0,3.3137016,2.6863203,6,5.9999995,6
+	h52.006897c3.3137016,0,6-2.6862984,6-6V14C64.0034485,10.6862001,61.3171501,8,58.0034485,8z M62.0034485,49.1108017
+	L43.084549,30.1919994l18.9188995-12.0555992V49.1108017z M5.9965506,10h52.006897c2.2056007,0,4,1.7943001,4,4v1.7664003
+	L34.4677505,33.3134003c-1.4902,0.9492989-3.3935013,0.9199982-4.8495998-0.0703011L1.9965508,14.4694996V14
+	C1.9965508,11.7943001,3.7910507,10,5.9965506,10z M1.9965508,16.8852005L21.182251,29.9251003L1.9965508,49.1108017V16.8852005z
+	 M58.0034485,54H5.9965506c-1.6473999,0-3.0638998-1.0021019-3.6760998-2.4278984l20.5199013-20.5200024l5.6547985,3.843401
+	c1.0859013,0.7383003,2.3418007,1.1083984,3.5995998,1.1083984c1.1953011,0,2.3925018-0.3339996,3.4463005-1.0048981
+	l5.8423996-3.7230015l20.2961006,20.2961025C61.0673485,52.9978981,59.6508713,54,58.0034485,54z"
+                    />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+            <div
+              style={{
+                width: "2px",
+                minHeight: "15vh",
+                backgroundColor: "white",
+              }}
+            />
+            <div>
+              <form>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.5rem",
+                  }}
+                >
+                  <label for="name">Name:</label>
+                  <input
+                    name="name"
+                    type="text"
+                    placeholder="Enter your name"
+                    style={{
+                      //   backgroundColor: "transparent",
+                      textDecorationColor: "#EFE1D2",
+                      borderColor: "white",
+                    }}
+                    required
+                    onChange={(e)=>{
+                        setData({...data,[e.target.name]:e.target.value})
+                    }}
+                  />
                 </div>
+                <div
+                  style={{
+                    marginTop: "0.5rem",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.5rem",
+                  }}
+                >
+                  <label for="mail">Email :</label>
+                  <input
+                    name="mail"
+                    type="text"
+                    placeholder="Enter your mail"
+                    style={{
+                      //   backgroundColor: "transparent",
+                      textDecorationColor: "#EFE1D2",
+                      borderColor: "white",
+                    }}
+                    required
+                    onChange={(e)=>{
+                        setData({...data,[e.target.name]:e.target.value})
+                    }}
+                  />
+                </div>
+                <div
+                  style={{
+                    marginTop: "0.5rem",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.5rem",
+                  }}
+                >
+                  <label for="message">Message:</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    placeholder="Enter a message "
+                    onChange={(e)=>{
+                        setData({...data,[e.target.name]:e.target.value})
+                    }}
+                  ></textarea>
+                
+                </div>
+                <button  style={{ marginTop: "0.5rem" }} onClick={SendMail}>
+                  Notify me
+                </button>
+              </form>
+            </div>
           </div>
-
-        </main>
-        <footer><p>Powered by navneet</p>
+        </section>
+      </main>
+      <footer>
+        <p>Powered by Navneet Gupta</p>
       </footer>
     </div>
   );
